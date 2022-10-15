@@ -2,21 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Typography,
-  IconButton,
-  Grid,
-  List,
-  ListItem,
-} from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import PinterestIcon from '@material-ui/icons/Pinterest';
+import { Typography, IconButton, Grid, List, ListItem } from '@material-ui/core';
+import GithubIcon from '@material-ui/icons/GitHub';
+import Link from 'next/link';
 import { Image } from '../../../../components/atoms';
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(6, 0),
     [theme.breakpoints.up('md')]: {
@@ -33,7 +24,6 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 8),
     },
   },
-
 
   groupTitle: {
     textTransform: 'uppercase',
@@ -83,28 +73,26 @@ const useStyles = makeStyles(theme => ({
   navLink: {
     color: 'rgba(255,255,255,.6)',
   },
-
 }));
 
-const Footer = props => {
+const Footer = (props) => {
   const { pages, className, ...rest } = props;
 
   const classes = useStyles();
 
-
-  const MenuGroup = props => {
+  const MenuGroup = (props) => {
     const { item } = props;
     return (
       <List disablePadding className={classes.menuItem}>
         <ListItem disableGutters className={classes.menuGroupItem}>
-          <Typography variant="body2" className={classes.menuGroupTitle}>
+          <Typography variant='body2' className={classes.menuGroupTitle}>
             {item.groupTitle}
           </Typography>
         </ListItem>
         {item.pages.map((page, i) => (
           <ListItem disableGutters key={i} className={classes.menuGroupItem}>
             <Typography
-              variant="body2"
+              variant='body2'
               component={'a'}
               href={page.href}
               className={clsx(classes.navLink, 'submenu-item')}
@@ -124,25 +112,27 @@ const Footer = props => {
           <Grid item xs={12} md={2}>
             <List disablePadding>
               <ListItem disableGutters>
-                <IconButton className={classes.socialIcon}>
-                  <FacebookIcon className={classes.icon} />
-                </IconButton>
-                <IconButton className={classes.socialIcon}>
-                  <InstagramIcon className={classes.icon} />
-                </IconButton>
-                <IconButton className={classes.socialIcon}>
-                  <TwitterIcon className={classes.icon} />
-                </IconButton>
-                <IconButton className={classes.socialIcon}>
-                  <PinterestIcon className={classes.icon} />
-                </IconButton>
+                <Link passHref href='https://github.com/A1DS19'>
+                  <a target='_blank'>
+                    <IconButton className={classes.socialIcon}>
+                      <GithubIcon className={classes.icon} />
+                    </IconButton>
+                  </a>
+                </Link>
+              </ListItem>
+              <ListItem disableGutters>
+                <Link passHref href='https://www.linkedin.com/in/jose-padilla-b9aa96237/'>
+                  <a target='_blank' rel='noopener noreferrer'>
+                    <Typography color='primary'>
+                      Jose Padilla {new Date().getFullYear()}
+                    </Typography>
+                  </a>
+                </Link>
               </ListItem>
             </List>
           </Grid>
           <Grid item xs={12} md={10} className={classes.menuListContainer}>
-            <Grid container spacing={0}>
-
-            </Grid>
+            <Grid container spacing={0}></Grid>
           </Grid>
         </Grid>
       </div>

@@ -57,7 +57,7 @@ const Application = (props) => {
     setBaseImage(base64);
     axios
       .post(
-        '/api/predict',
+        '/predict',
         { image: base64 } //send this data to our server, and our server will send data to aws endpoint
       )
       .then((res) => {

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -21,20 +21,19 @@ const UserRoute = ({ children, showNav = true }) => {
   const router = useRouter();
   const classes = useStyles();
 
-
   useEffect(() => {
     fetchUser();
   }, []);
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("/api/current-user");
+      const { data } = await axios.get('/current-user');
       //   console.log(data);
       if (data.ok) setOk(true);
     } catch (err) {
       console.log(err);
       setOk(false);
-      router.push("/login");
+      router.push('/login');
     }
   };
 
@@ -45,15 +44,14 @@ const UserRoute = ({ children, showNav = true }) => {
           <LinearProgress />
         </div>
       ) : (
-        <div >
-          <div >
-            <div >{children}</div>
+        <div>
+          <div>
+            <div>{children}</div>
           </div>
         </div>
       )}
     </>
   );
-  };
-
+};
 
 export default UserRoute;

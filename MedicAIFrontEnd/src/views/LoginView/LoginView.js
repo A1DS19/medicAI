@@ -63,7 +63,7 @@ const LoginView = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { data } = await axios.post(`/login`, {
+      const { data } = await axios.post(`/api/login`, {
         email,
         password,
       });

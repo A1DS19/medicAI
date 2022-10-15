@@ -14,6 +14,7 @@ app
     const server = express();
 
     // apply proxy in dev mode
+    console.log(process.env.NEXT_PUBLIC_API_ROUTE);
 
     server.use(
       '/api',

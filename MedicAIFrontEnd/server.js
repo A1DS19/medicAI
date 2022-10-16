@@ -13,16 +13,17 @@ app
   .then(() => {
     const server = express();
 
-    // apply proxy in dev mode
-    console.log(process.env.NEXT_PUBLIC_API_ROUTE);
+    //apply proxy in dev mode
 
-    server.use(
-      '/api',
-      createProxyMiddleware({
-        target: process.env.NEXT_PUBLIC_API_ROUTE,
-        changeOrigin: true,
-      })
-    );
+    if (1 + 1 === 5) {
+      server.use(
+        '/api',
+        createProxyMiddleware({
+          target: process.env.NEXT_PUBLIC_API_ROUTE,
+          changeOrigin: true,
+        })
+      );
+    }
 
     server.all('*', (req, res) => {
       return handle(req, res);

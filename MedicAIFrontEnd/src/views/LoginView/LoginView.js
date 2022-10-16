@@ -10,6 +10,7 @@ import { HeroShapedAuth } from '../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 import toast, { Toaster } from 'react-hot-toast';
 import loginSvg from '../../../public/assets/login.svg';
+import { axiosConfig } from '../../../config/axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +64,7 @@ const LoginView = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const { data } = await axios.post(`/api/login`, {
+      const { data } = await axiosConfig.post(`/login`, {
         email,
         password,
       });

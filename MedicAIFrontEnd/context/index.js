@@ -1,6 +1,7 @@
 import { useReducer, createContext, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter, userRouter } from 'next/router';
+import { axiosConfig } from '../config/axios';
 
 // initial state
 const intialState = {
@@ -38,7 +39,7 @@ const Provider = ({ children }) => {
     });
   }, []);
 
-  axios.interceptors.response.use(
+  axiosConfig.interceptors.response.use(
     function (response) {
       // any status code that lie within the range of 2XX cause this function
       // to trigger
@@ -50,8 +51,8 @@ const Provider = ({ children }) => {
       let res = error.response; //once the cookie expires this function runs and if these conditions true it means it has expired and we have to logout
       if (res.status === 401 && res.config && !res.config.__isRetryRequest) {
         return new Promise((resolve, reject) => {
-          axios
-            .get('/api/logout')
+          axiosConfig
+            .get('/logout')
             .then((data) => {
               console.log('/401 error > logout');
               dispatch({ type: 'LOGOUT' });
@@ -67,15 +68,6 @@ const Provider = ({ children }) => {
       return Promise.reject(error);
     }
   );
-
-  // useEffect(() => {
-  //   const getCsrfToken = async () => {
-  //     const { data } = await axios.get('/api/csrf-token');
-  //     // console.log("CSRF", data);
-  //     axios.defaults.headers['X-CSRF-Token'] = data.getCsrfToken;
-  //   };
-  //   getCsrfToken();
-  // }, []);
 
   return <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>;
 };

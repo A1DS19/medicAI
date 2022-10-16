@@ -1,9 +1,9 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 import {
   Toolbar,
@@ -19,11 +19,9 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Image, DarkModeToggler } from '../../../../components/atoms';
-import { Context } from "../../../../../context";
+import { Context } from '../../../../../context';
 
-
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   flexGrow: {
     flexGrow: 1,
   },
@@ -91,7 +89,6 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.dark,
   },
 
-
   menu: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -110,20 +107,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...rest }) => {
+const Topbar = ({
+  themeMode,
+  themeToggler,
+  onSidebarOpen,
+  pages,
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   const { state, dispatch } = useContext(Context);
   const { user } = state;
   const router = useRouter();
 
-
   const logout = async () => {
-    dispatch({ type: "LOGOUT" });
-    window.localStorage.removeItem("user");
-    const { data } = await axios.get("/api/logout");
-    router.push("/login");
+    dispatch({ type: 'LOGOUT' });
+    window.localStorage.removeItem('user');
+    const { data } = await axios.get('/api/logout');
+    router.push('/login');
   };
-
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [openedPopoverId, setOpenedPopoverId] = useState(null);
@@ -138,32 +140,30 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
     setOpenedPopoverId(null);
   };
 
-
-  const MenuGroup = props => {
+  const MenuGroup = (props) => {
     const { item } = props;
     return (
       <List disablePadding>
         <ListItem disableGutters>
           <Typography
-            variant="body2"
-            color="primary"
+            variant='body2'
+            color='primary'
             className={classes.menuGroupTitle}
             onClick={handleClose}
-
           >
             {item.groupTitle}
           </Typography>
         </ListItem>
         {item.pages.map((page, i) => (
-          <ListItem    disableGutters key={i} className={classes.menuGroupItem}>
+          <ListItem disableGutters key={i} className={classes.menuGroupItem}>
             <Typography
-              variant="body1"
+              variant='body1'
               component={'a'}
               className={clsx(classes.navLink, 'submenu-item')}
-              color="textSecondary"
+              color='textSecondary'
               onClick={handleClose}
             >
-              <span onClick={()=>router.push(page.href)}>{page.title}</span>
+              <span onClick={() => router.push(page.href)}>{page.title}</span>
             </Typography>
           </ListItem>
         ))}
@@ -171,87 +171,61 @@ const Topbar = ({ themeMode, themeToggler, onSidebarOpen, pages, className, ...r
     );
   };
 
-let logoutButton;
-if (!user ) {
-   logoutButton=null
- } else {
-   logoutButton = <Button
-    variant="outlined"
-    component="a"
-    onClick={logout}
-   >
-     Logout
-   </Button>
- }
-
- let predictButton;
- if (!user ) {
-    predictButton=null
+  let logoutButton;
+  if (!user) {
+    logoutButton = null;
   } else {
-    predictButton = <Button
-     variant="outlined"
-     component="a"
-     href="/user"
-    >
-      Predict
-    </Button>
+    logoutButton = (
+      <Button variant='outlined' component='a' onClick={logout}>
+        Logout
+      </Button>
+    );
   }
 
+  const predictButton = (
+    <Button variant='outlined' component='a' href='/user'>
+      Predict
+    </Button>
+  );
 
-   let registerButton;
-   if (user) {
-      registerButton = null
-    } else {
-      registerButton = <Button
-        variant="outlined"
-        component="a"
-        href="/register"
-      >
+  let registerButton;
+  if (user) {
+    registerButton = null;
+  } else {
+    registerButton = (
+      <Button variant='outlined' component='a' href='/register'>
         Register
       </Button>
-    }
+    );
+  }
 
-    let loginButton;
-    if (user) {
-       loginButton = null
-     } else {
-       loginButton = <Button
-         variant="outlined"
-         component="a"
-         href="/login"
-       >
-         Login
-       </Button>
-     }
-
+  let loginButton;
+  if (user) {
+    loginButton = null;
+  } else {
+    loginButton = (
+      <Button variant='outlined' component='a' href='/login'>
+        Login
+      </Button>
+    );
+  }
 
   return (
     <Toolbar disableGutters className={classes.toolbar} {...rest}>
-      <div >
-        <a href="/" title="MedicAI">
-        <Typography
-          variant="body2"
-          color="primary"
-          size="large">
-          <h1>MedicAI</h1>
-        </Typography>
+      <div>
+        <a href='/' title='MedicAI'>
+          <Typography variant='body2' color='primary' size='large'>
+            <h1>MedicAI</h1>
+          </Typography>
         </a>
       </div>
       <div className={classes.flexGrow} />
       <Hidden smDown>
         <List disablePadding className={classes.navigationContainer}>
-        <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
-          {loginButton}
-        </ListItem>
-          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
-            {registerButton}
-          </ListItem>
           <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
             {predictButton}
           </ListItem>
-          <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
-            {logoutButton}
-          </ListItem>
+
           <ListItem className={clsx(classes.listItem, 'menu-item--no-dropdown')}>
             <DarkModeToggler themeMode={themeMode} onClick={() => themeToggler()} />
           </ListItem>
@@ -262,7 +236,7 @@ if (!user ) {
         <IconButton
           className={classes.iconButton}
           onClick={onSidebarOpen}
-          aria-label="Menu"
+          aria-label='Menu'
         >
           <MenuIcon />
         </IconButton>

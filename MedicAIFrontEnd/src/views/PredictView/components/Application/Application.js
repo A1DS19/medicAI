@@ -6,6 +6,7 @@ import { useMediaQuery, Grid, Typography, TextField, Button } from '@material-ui
 import { IconText } from '../../../../components/atoms';
 import { SectionHeader } from '../../../../components/molecules';
 import axios from 'axios';
+import { axiosConfig } from '../../../../../config/axios';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -55,9 +56,9 @@ const Application = (props) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setBaseImage(base64);
-    axios
+    axiosConfig
       .post(
-        '/api/predict',
+        process.env.NEXT_PUBLIC_API_ROUTE + '/api/predict',
         { image: base64 } //send this data to our server, and our server will send data to aws endpoint
       )
       .then((res) => {

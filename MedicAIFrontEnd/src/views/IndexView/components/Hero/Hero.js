@@ -45,16 +45,12 @@ const Hero = (props) => {
                 </Typography>
               </span>
             }
-            subtitle='Please login before making prediction'
             ctaGroup={[
               <Link href='/user'>
                 <Button variant='contained' color='primary' size='large'>
-                  Start now
+                  Predict
                 </Button>
               </Link>,
-              <Button variant='outlined' color='primary' size='large'>
-                Learn more
-              </Button>,
             ]}
             align='left'
             disableGutter

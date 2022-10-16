@@ -10,6 +10,7 @@ import { SectionHeader } from '../../components/molecules';
 import { HeroShapedAuth } from '../../components/organisms';
 import { Typography, Grid, Button, TextField } from '@material-ui/core';
 import registerSvg from '../../../public/assets/register.svg';
+import { axiosConfig } from '../../../config/axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +64,7 @@ const RegisterView = () => {
     // console.table({ name, email, password });
     try {
       setLoading(true);
-      const { data } = await axios.post(`/api/register`, {
+      const { data } = await axiosConfig.post(`/register`, {
         name,
         email,
         password,

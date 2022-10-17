@@ -168,7 +168,7 @@ const Application = (props) => {
             <IconText
               fontIconClass='fas fa-cloud-upload-alt'
               color={theme.palette.primary.main}
-              title='Upload Image'
+              title='Upload lungs Image'
               typographyProps={{
                 className: classes.iconText,
               }}

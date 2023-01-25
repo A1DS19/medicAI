@@ -109,28 +109,6 @@ const Footer = (props) => {
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.footerContainer}>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={2}>
-            <List disablePadding>
-              <ListItem disableGutters>
-                <Link passHref href='https://github.com/A1DS19'>
-                  <a target='_blank'>
-                    <IconButton className={classes.socialIcon}>
-                      <GithubIcon className={classes.icon} />
-                    </IconButton>
-                  </a>
-                </Link>
-              </ListItem>
-              <ListItem disableGutters>
-                <Link passHref href='https://www.linkedin.com/in/jose-padilla-b9aa96237/'>
-                  <a target='_blank' rel='noopener noreferrer'>
-                    <Typography color='primary'>
-                      Jose Padilla {new Date().getFullYear()}
-                    </Typography>
-                  </a>
-                </Link>
-              </ListItem>
-            </List>
-          </Grid>
           <Grid item xs={12} md={10} className={classes.menuListContainer}>
             <Grid container spacing={0}></Grid>
           </Grid>

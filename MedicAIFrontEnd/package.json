@@ -10,8 +10,8 @@
     "clear-all": "rimraf ./.cache ./.next ./node_modules ./package-lock.json"
   },
   "engines": {
-    "node": "16.15.0",
-    "npm": "8.5.5"
+    "node": ">=16.0.0 <17.0.0",
+    "npm": ">=8.0.0 <9.0.0"
   },
   "browserslist": [
     ">0.2%",

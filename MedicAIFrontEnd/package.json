@@ -9,6 +9,10 @@
     "start": "next start",
     "clear-all": "rimraf ./.cache ./.next ./node_modules ./package-lock.json"
   },
+  "engines": {
+    "node": "16.15.0",
+    "npm": "8.5.5"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
